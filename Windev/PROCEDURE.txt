@@ -1,0 +1,53 @@
+// Résumé : Recherche toutes les combinaisons possibles des éléments d'un tableau dont la somme est égale à une valeur cible.
+// La fonction utilise une approche récursive avec backtracking pour explorer toutes les possibilités.
+//
+// Syntaxe :
+// [ <Résultat> = ] LettrerTotalDeNumeriques (<ValeurTotale> est numérique, <listeNumeriques> est tableau (numérique))
+//
+// Paramètres :
+//  - ValeurTotale (numérique) : La somme cible à atteindre avec les éléments du tableau.
+//  - listeNumeriques (tableau (numérique)) : Liste des valeurs numériques à utiliser pour former les combinaisons.
+//
+// Exemple :
+//  Pour LettrerTotalDeNumeriques(5, [2, 3, 4, 1])
+//  Les combinaisons valides sont :
+//   - 2 + 3
+//   - 4 + 1
+//  La valeur retournée sera [[1, 2], [3, 4]], représentant les indices des éléments utilisés (1-based).
+//
+// Valeur de retour (variable tbCombinaisonsTrouvees) :
+//  - Tableau de tableaux d'entiers : Chaque sous-tableau contient les indices des éléments formant une combinaison valide.
+//  - Si aucune combinaison n'est trouvée, retourne un tableau vide.
+//
+PROCÉDURE LettrerTotalDeNumeriques(ValeurTotale numérique, listeNumeriques est un tableau de numérique)
+tbCombinaisonsTrouvees	est un tableau de tableau de entiers
+
+	PROCÉDURE INTERNE PROCI_TrouverCombinaisons(tbNumeriques est un tableau de numérique, xTotal est un numérique, tbTrouvees est un tableau de tableau de entiers, tbActuelle est un tableau de entiers, index est un entier)
+		POUR i = index _À_ Dimension(tbNumeriques)
+			Ajoute(tbActuelle, i)
+
+			// Calcul de la somme
+			LaSomme est un numérique = 0
+			POUR j = 1 _À_ tbActuelle..Occurrence
+				LaSomme += tbNumeriques[tbActuelle[j]]
+			FIN
+
+			// Ajoute la combinaison si valide
+			SI LaSomme = xTotal = EPSILON ALORS
+				tbCopie est un tableau de entiers
+				POUR k = 1 _À_ tbActuelle..Occurrence
+					Ajoute(tbCopie, tbActuelle[k])
+				FIN
+				Ajoute(tbTrouvees, tbCopie)
+			FIN
+
+			// Continue la recherche dans tous les cas (même si combinaison valide)
+			PROCI_TrouverCombinaisons(tbNumeriques, xTotal, tbTrouvees, tbActuelle, i + 1)
+
+			Supprime(tbActuelle, tbActuelle..Occurrence) // Backtracking
+		FIN
+	FIN
+
+// Lancer la recherche des combinaisons à partir du premier élément
+PROCI_TrouverCombinaisons(listeNumeriques, ValeurTotale, tbCombinaisonsTrouvees, [], 1)
+RENVOYER tbCombinaisonsTrouvees

@@ -1,0 +1,18 @@
+tbRes est un tableau de tableau d'entiers = divers.LettrerTotalDeNumeriques(-32.69, [11.5, 3.68, 5.38, 2.21, 8.69, 20.99, 12.5, 25.43, 10.75, -30, -5.58, -1.85, -11.54, -9.11, -21.01])
+//	  																			      1     2     3     4    5     6      7     8      9     10     11     12     13      14      15
+SI tbRes..Occurrence <> 0 ALORS
+	Trace("Nombre de combinaisons : " + tbRes..Occurrence)
+	POUR i = 1 _À_ tbRes..Occurrence
+		sCombinaison est une chaîne = "["
+		POUR j = 1 _À_ tbRes[i]..Occurrence
+			sCombinaison += ""+ (tbRes[i][j])
+			SI j < tbRes[i]..Occurrence ALORS
+				sCombinaison += ", "
+			FIN
+		FIN
+		sCombinaison += "]"
+		Trace(sCombinaison)
+	FIN
+SINON
+	Trace("Pas de résultat")
+FIN
